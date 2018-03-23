@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,6 +12,7 @@ import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksView;
 
+import scout.uw.edu.scout_android_poc.DetailActivity;
 import scout.uw.edu.scout_android_poc.MainActivity;
 import scout.uw.edu.scout_android_poc.R;
 import scout.uw.edu.scout_android_poc.services.TurbolinksSessionManager;
@@ -85,12 +85,22 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
         return view;
     }
 
+    /**
+     * called whenever a view is set to be destroyed.
+     * @param container the ViewGroup the view is a member of
+     * @param position an int representing the View's position
+     * @param object the View to be deleted
+     */
     @Override
     public void destroyItem (ViewGroup container, int position, Object object) {
-        Log.d("DELETE CALLED", "" + position);
         //container.removeView((View) object);
     }
 
+    /**
+     * gets the URL for a given view
+     * @param position an int representing the View's position
+     * @return a String containing the url to be loaded by the view.
+     */
     private String getUrl(int position){
         String url = res.getString(R.string.baseUrl);
         url += res.getStringArray(R.array.campusUrls)[0];
@@ -102,7 +112,6 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
 
     @Override
     public void onPageFinished() {
-
     }
 
     @Override
@@ -124,12 +133,14 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
     public void visitCompleted() {
     }
 
-    // The starting point for any href clicked inside a Turbolinks enabled site. In a simple case
-    // you can just open another activity, or in more complex cases, this would be a good spot for
-    // routing logic to take you to the right place within your app.
+    /**
+     * called when user visits a link from within a turbolinks view
+     * @param location the url the user is visiting
+     * @param action String representing whether this is a forward or backward navigation
+     */
     @Override
     public void visitProposedToLocationWithAction(String location, String action) {
-        Intent intent = new Intent(mContext, MainActivity.class);
+        Intent intent = new Intent(mContext, DetailActivity.class);
         intent.putExtra("INTENT_URL", location);
         mContext.startActivity(intent);
     }
