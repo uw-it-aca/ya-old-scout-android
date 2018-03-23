@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">scout-android-poc</string>
+
+    <string-array name="campusUrls">
+        <item>seattle/</item>
+        <item>bothell/</item>
+        <item>tacoma/</item>
+    </string-array>
+
+    <string-array name="views">
+        <item>Discover</item>
+        <item>Food</item>
+        <item>Study</item>
+        <item>Tech</item>
+    </string-array>
+
+    <string name="baseUrl">https://scout-test.s.uw.edu/h/</string>
+
+    <string-array name="baseUrls">
+        <item></item>
+        <item>food/</item>
+        <item>study/</item>
+        <item>tech/</item>
+    </string-array>
+</resources>
