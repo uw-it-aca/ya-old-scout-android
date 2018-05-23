@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;;
 
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksSession;
@@ -16,7 +14,7 @@ import com.basecamp.turbolinks.TurbolinksView;
  * Created by adikumar on 3/23/18.
  */
 
-public class DetailActivity extends AppCompatActivity implements TurbolinksAdapter {
+public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +32,14 @@ public class DetailActivity extends AppCompatActivity implements TurbolinksAdapt
                 .adapter(this)
                 .view(turbolinksView)
                 .visit(url);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.getItem(0).setVisible(false);
+        menu.getItem(1).setVisible(false);
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     //TurboLinks Adapter

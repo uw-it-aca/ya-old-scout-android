@@ -26,6 +26,10 @@
         <activity android:name=".DetailActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+
+        <activity android:name=".FilterActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

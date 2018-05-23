@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,7 +16,6 @@ import com.basecamp.turbolinks.TurbolinksView;
 import scout.uw.edu.scout_android_poc.DetailActivity;
 import scout.uw.edu.scout_android_poc.MainActivity;
 import scout.uw.edu.scout_android_poc.R;
-import scout.uw.edu.scout_android_poc.services.TurbolinksSessionManager;
 
 /**
  * Created by adikumar on 3/21/18.
@@ -26,19 +26,26 @@ import scout.uw.edu.scout_android_poc.services.TurbolinksSessionManager;
 public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter {
 
     private Context mContext;
-    Resources res;
-    TurbolinksSessionManager sessionManager;
-    TurbolinksView[] views;
+    private Resources res;
+    private TurbolinksSession[] sessions;
+    private UserPreferences userPreferences;
+    private TurbolinksView[] views;
 
     public ScoutPagerAdapter (Context context) {
         mContext = context;
         res = mContext.getResources();
-        sessionManager = new TurbolinksSessionManager();
+        userPreferences = ((MainActivity)context).getUserPreferences();
+
         views = new TurbolinksView[4];
         views[0] = ((Activity)mContext).findViewById(R.id.discover_view);
         views[1] = ((Activity)mContext).findViewById(R.id.food_view);
         views[2] = ((Activity)mContext).findViewById(R.id.study_view);
         views[3] = ((Activity)mContext).findViewById(R.id.tech_view);
+
+        sessions = new TurbolinksSession[4];
+        for(int i = 0; i < sessions.length; i++) {
+            sessions[i] = TurbolinksSession.getNew(mContext);
+        }
     }
 
     /**
@@ -69,18 +76,17 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
      */
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        String url = getUrl(position);
+        String url = userPreferences.getTabURL(position);
 
-        TurbolinksSession session = sessionManager.getSession(url, mContext);
-
+        TurbolinksSession session = sessions[position];
         TurbolinksView view = views[position];
+
+        session.setDebugLoggingEnabled(true);
 
         session.activity((Activity)mContext)
                 .adapter(this)
                 .view(view)
                 .visit(url);
-
-        //session.setDebugLoggingEnabled(true);
 
         return view;
     }
@@ -94,18 +100,9 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
     @Override
     public void destroyItem (ViewGroup container, int position, Object object) {
         //container.removeView((View) object);
-    }
-
-    /**
-     * gets the URL for a given view
-     * @param position an int representing the View's position
-     * @return a String containing the url to be loaded by the view.
-     */
-    private String getUrl(int position){
-        String url = res.getString(R.string.baseUrl);
-        url += res.getStringArray(R.array.campusUrls)[0];
-        url += res.getStringArray(R.array.baseUrls)[position];
-        return url;
+        //TurbolinksView newView = new TurbolinksView(mContext);
+        //views[position] = newView;
+        //container.addView(newView, position);
     }
 
     //TurboLinks Adapter
@@ -121,7 +118,7 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
 
     @Override
     public void pageInvalidated() {
-
+        Log.d("Invalidated!","");
     }
 
     @Override
@@ -131,6 +128,7 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
 
     @Override
     public void visitCompleted() {
+
     }
 
     /**
@@ -143,5 +141,26 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
         Intent intent = new Intent(mContext, DetailActivity.class);
         intent.putExtra("INTENT_URL", location);
         mContext.startActivity(intent);
+    }
+
+    public void reloadViews () {
+        for (int i = 0; i < views.length; i++) {
+            String url = userPreferences.getTabURL(i);
+            TurbolinksSession session = sessions[i];
+            if(!url.equals(session.getWebView().getUrl())) {
+                session.resetToColdBoot();
+            }
+            //Log.d("LOADING", url);
+            //session.getWebView().clearCache(false);
+            session.activity((Activity)mContext)
+                    .adapter(this)
+                    .view(views[i])
+                    .visit(url);
+        }
+    }
+
+    @Override
+    public String getPageTitle (int tab) {
+        return sessions[tab].getWebView().getTitle();
     }
 }

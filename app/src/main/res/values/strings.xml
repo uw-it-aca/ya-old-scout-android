@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">scout-android-poc</string>
+    <string name="app_name">Scout</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_done">Done</string>
 
-    <string-array name="campusUrls">
+    <string-array name="pref_campus_list_urls">
         <item>seattle/</item>
         <item>bothell/</item>
         <item>tacoma/</item>
@@ -14,12 +17,49 @@
         <item>Tech</item>
     </string-array>
 
+    <array name="scout_tabs">
+        <item>H</item>
+        <item>F</item>
+        <item>S</item>
+        <item>T</item>
+    </array>
+
     <string name="baseUrl">https://scout-test.s.uw.edu/h/</string>
 
-    <string-array name="baseUrls">
+    <string-array name="scout_tab_urls">
         <item></item>
         <item>food/</item>
         <item>study/</item>
         <item>tech/</item>
     </string-array>
+
+    <array name="pref_campus_list_titles">
+        <item>Seattle</item>
+        <item>Bothell</item>
+        <item>Tacoma</item>
+    </array>
+
+    <array name="pref_campus_list_values">
+        <item>seattle</item>
+        <item>bothell</item>
+        <item>tacoma</item>
+    </array>
+
+    <string name="pref_campus_key">__pref_campus__</string>
+    <string name="pref_title_campus">Campus</string>
+    <string name="choose_campus">Campus</string>
+    <string name="not_found">Not Found</string>
+    <string name="campus_chooser_negative_text">Cancel</string>
+    <string name="campus_chooser_positive_text">Choose</string>
+    <string name="action_clear">Clear</string>
+    <string name="title_activity_dicover">Discover</string>
+    <string name="action_help_and_feedback"><![CDATA[Help & Feedback]]></string>
+
+
+    <string name="help_email">help@uw.edu</string>
+    <string name="help_subject">Scout Android: Help Needed</string>
+    <string name="action_okay">OK</string>
+    <string name="temporarily_unavailable">This data is temporarily unavailable. Please try again later.</string>
+    <string name="error_requesting">Error Requesting Data</string>
+    <string name="unknown_error">There was a problem on our end. Our developers have been alerted of this issue and are working to fix the problem.</string>
 </resources>
