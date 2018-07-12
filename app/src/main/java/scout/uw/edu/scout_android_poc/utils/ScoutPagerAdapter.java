@@ -99,10 +99,6 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
      */
     @Override
     public void destroyItem (ViewGroup container, int position, Object object) {
-        //container.removeView((View) object);
-        //TurbolinksView newView = new TurbolinksView(mContext);
-        //views[position] = newView;
-        //container.addView(newView, position);
     }
 
     //TurboLinks Adapter

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,7 +19,7 @@ import scout.uw.edu.scout_android_poc.utils.CustomViewPager;
 import scout.uw.edu.scout_android_poc.utils.ScoutPagerAdapter;
 import scout.uw.edu.scout_android_poc.utils.UserPreferences;
 
-public class MainActivity extends ScoutActivity implements ViewPager.OnPageChangeListener,
+public class MainActivity extends ScoutActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationViewEx bottomNavigationView;
@@ -30,7 +29,6 @@ public class MainActivity extends ScoutActivity implements ViewPager.OnPageChang
     @BindArray(R.array.views) String[] scoutTabTitles;
     private ScoutPagerAdapter pagerAdapter;
     private CustomViewPager viewPager;
-    private MenuItem prevMenuItem;
     private int campusIndex = -1;
     private Menu mMenu;
 
@@ -45,7 +43,6 @@ public class MainActivity extends ScoutActivity implements ViewPager.OnPageChang
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.viewpager);
-        viewPager.addOnPageChangeListener(this);
         pagerAdapter = new ScoutPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(3);
@@ -63,34 +60,6 @@ public class MainActivity extends ScoutActivity implements ViewPager.OnPageChang
             campusIndex = userPreferences.getCampusSelectedIndex();
         }
 
-    }
-
-    /**
-     * updates the bottom navigation view and action bar on page change
-     *
-     * @param position the index of the new page
-     */
-    @Override
-    public void onPageSelected(int position) {
-        if (prevMenuItem != null) {
-            prevMenuItem.setChecked(false);
-        }
-        else
-        {
-            bottomNavigationView.getMenu().getItem(0).setChecked(false);
-        }
-
-        bottomNavigationView.getMenu().getItem(position).setChecked(true);
-        prevMenuItem = bottomNavigationView.getMenu().getItem(position);
-        setTitle(pagerAdapter.getPageTitle(viewPager.getCurrentItem()));
-
-        if(position == 0) {
-            mMenu.getItem(0).setVisible(true);
-            mMenu.getItem(1).setVisible(false);
-        } else {
-            mMenu.getItem(0).setVisible(false);
-            mMenu.getItem(1).setVisible(true);
-        }
     }
 
     /**
@@ -124,29 +93,6 @@ public class MainActivity extends ScoutActivity implements ViewPager.OnPageChang
     }
 
     /**
-     * called when a page is scrolled horizontally, necessary for viewpager adapter interface
-     *
-     * @param state the new scroll state of the page
-     */
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-
-    }
-
-    /**
-     * called when a page is scrolled horizontally, needed for viewPagerAdapter interface
-     *
-     * @param position the new position of the page
-     * @param positionOffset a float corresponding to the new offset
-     * @param positionOffsetPixels the new offset in pixels
-     */
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    /**
      * updates viewpager when a bottom navigation button is clicked
      *
      * @param item the MenuItem that was clicked
@@ -154,20 +100,34 @@ public class MainActivity extends ScoutActivity implements ViewPager.OnPageChang
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //replace campus button with filter
+        mMenu.getItem(0).setVisible(false);
+        mMenu.getItem(1).setVisible(true);
+
         switch (item.getItemId()) {
             case R.id.ic_arrow:
                 viewPager.setCurrentItem(0, false);
+                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+
+                // replace filter button with campus
+                mMenu.getItem(0).setVisible(true);
+                mMenu.getItem(1).setVisible(false);
                 break;
             case R.id.ic_android:
                 viewPager.setCurrentItem(1, false);
+                bottomNavigationView.getMenu().getItem(1).setChecked(true);
                 break;
             case R.id.ic_books:
                 viewPager.setCurrentItem(2, false);
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
                 break;
             case R.id.ic_center_focus:
                 viewPager.setCurrentItem(3, false);
+                bottomNavigationView.getMenu().getItem(3).setChecked(true);
                 break;
         }
+
+        setTitle(pagerAdapter.getPageTitle(viewPager.getCurrentItem()));
 
         return false;
     }
