@@ -204,7 +204,7 @@ public class UserPreferences {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
 
-        return "latitude=" + latitude + "&longitude=" + longitude;
+        return "h_lat=" + latitude + "&h_long=" + longitude;
     }
 
     public void deleteFilters() {

@@ -87,9 +87,9 @@ public class MainActivity extends ScoutActivity implements
      */
     @Override
     protected void onResume() {
-        super.onResume();
-
         pagerAdapter.reloadViews();
+
+        super.onResume();
     }
 
     /**
