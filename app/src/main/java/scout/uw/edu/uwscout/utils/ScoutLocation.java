@@ -1,4 +1,4 @@
-package scout.uw.edu.scout_android_poc.utils;
+package scout.uw.edu.uwscout.utils;
 
 import android.Manifest;
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package scout.uw.edu.scout_android_poc;
+package scout.uw.edu.uwscout;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,8 @@ import android.view.MenuItem;
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksSession;
 
-import scout.uw.edu.scout_android_poc.utils.ErrorHandler;
-import scout.uw.edu.scout_android_poc.utils.UserPreferences;
+import scout.uw.edu.uwscout.utils.ErrorHandler;
+import scout.uw.edu.uwscout.utils.UserPreferences;
 
 
 /**

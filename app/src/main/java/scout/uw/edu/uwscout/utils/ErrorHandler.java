@@ -1,4 +1,4 @@
-package scout.uw.edu.scout_android_poc.utils;
+package scout.uw.edu.uwscout.utils;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import scout.uw.edu.scout_android_poc.R;
+import scout.uw.edu.uwscout.R;
 
 
 /**

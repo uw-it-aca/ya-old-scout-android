@@ -1,9 +1,8 @@
-package scout.uw.edu.scout_android_poc.utils;
+package scout.uw.edu.uwscout.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.util.Set;
 

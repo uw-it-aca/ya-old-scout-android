@@ -1,4 +1,4 @@
-package scout.uw.edu.scout_android_poc.utils;
+package scout.uw.edu.uwscout.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,9 +13,9 @@ import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksView;
 
-import scout.uw.edu.scout_android_poc.DetailActivity;
-import scout.uw.edu.scout_android_poc.MainActivity;
-import scout.uw.edu.scout_android_poc.R;
+import scout.uw.edu.uwscout.DetailActivity;
+import scout.uw.edu.uwscout.MainActivity;
+import scout.uw.edu.uwscout.R;
 
 /**
  * Created by adikumar on 3/21/18.
@@ -37,10 +37,10 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
         userPreferences = ((MainActivity)context).getUserPreferences();
 
         views = new TurbolinksView[4];
-        views[0] = ((Activity)mContext).findViewById(R.id.discover_view);
-        views[1] = ((Activity)mContext).findViewById(R.id.food_view);
-        views[2] = ((Activity)mContext).findViewById(R.id.study_view);
-        views[3] = ((Activity)mContext).findViewById(R.id.tech_view);
+        views[0] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.discover_view);
+        views[1] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.food_view);
+        views[2] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.study_view);
+        views[3] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.tech_view);
 
         sessions = new TurbolinksSession[4];
         for(int i = 0; i < sessions.length; i++) {

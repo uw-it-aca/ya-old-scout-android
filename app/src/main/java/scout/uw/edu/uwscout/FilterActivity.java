@@ -1,10 +1,7 @@
-package scout.uw.edu.scout_android_poc;
+package scout.uw.edu.uwscout;
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,10 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 
-import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksView;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FilterActivity extends ScoutActivity {
@@ -37,7 +32,7 @@ public class FilterActivity extends ScoutActivity {
 
         turbolinksSession.setScreenshotsEnabled(false);
         turbolinksSession.setDebugLoggingEnabled(true);
-        turbolinksView = findViewById(R.id.turbolinks_view);
+        turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_view);
 
         location = getIntent().getStringExtra("INTENT_URL");
         filterType = getIntent().getIntExtra("FILTER_TYPE", 1);

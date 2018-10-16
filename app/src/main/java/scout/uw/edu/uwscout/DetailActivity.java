@@ -1,14 +1,16 @@
-package scout.uw.edu.scout_android_poc;
+package scout.uw.edu.uwscout;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Menu;;
+import android.view.Menu;
 
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksView;
+
+;
 
 /**
  * Created by adikumar on 3/23/18.
@@ -26,7 +28,7 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        TurbolinksView turbolinksView = findViewById(R.id.turbolinks_detail);
+        TurbolinksView turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_detail);
 
         TurbolinksSession.getDefault(this).activity(this)
                 .adapter(this)

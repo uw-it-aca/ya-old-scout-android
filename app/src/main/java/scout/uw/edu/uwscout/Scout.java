@@ -1,9 +1,10 @@
-package scout.uw.edu.scout_android_poc;
+package scout.uw.edu.uwscout;
 
 import android.app.Application;
 
+import scout.uw.edu.uwscout.utils.UserPreferences;
+
 //import scout.uw.edu.scout_android_poc.services.TurbolinksSessionManager;
-import scout.uw.edu.scout_android_poc.utils.UserPreferences;
 
 /**
  * Created by ezturner on 8/23/16.

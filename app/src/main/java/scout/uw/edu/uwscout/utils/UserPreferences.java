@@ -1,10 +1,10 @@
-package scout.uw.edu.scout_android_poc.utils;
+package scout.uw.edu.uwscout.utils;
 
 import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
-import scout.uw.edu.scout_android_poc.R;
+import scout.uw.edu.uwscout.R;
 
 /**
  * This class manages user preferences, notably surrounding the campus, campus URL and whether
