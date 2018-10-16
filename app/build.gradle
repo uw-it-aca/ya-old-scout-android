@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 24
     defaultConfig {
         applicationId "scout.uw.edu.uwscout"
-        minSdkVersion 25
-        targetSdkVersion 25
+        minSdkVersion 24
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -22,11 +22,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 //    implementation 'com.android.support:animated-vector-drawable:25.4.0'
 //    implementation 'com.android.support:recyclerview-v7:25.4.0'
-    implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation 'com.android.support:appcompat-v7:24.2.1'
     implementation 'com.basecamp:turbolinks:1.0.7' //19
     implementation 'com.afollestad.material-dialogs:core:0.9.4.0' //14
     implementation 'com.aurelhubert:ahbottomnavigation:2.1.0' //14
-    implementation "com.android.support:design:25.4.0"
+    implementation "com.android.support:design:24.2.1"
     implementation 'com.jakewharton:butterknife:8.8.1' //14
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
