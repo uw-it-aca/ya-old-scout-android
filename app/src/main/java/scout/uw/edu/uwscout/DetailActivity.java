@@ -28,7 +28,7 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        TurbolinksView turbolinksView = findViewById(R.id.turbolinks_detail);
+        TurbolinksView turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_detail);
 
         TurbolinksSession.getDefault(this).activity(this)
                 .adapter(this)

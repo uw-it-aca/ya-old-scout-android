@@ -5,13 +5,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import butterknife.BindArray;
 import butterknife.BindString;
@@ -19,10 +22,10 @@ import scout.uw.edu.uwscout.utils.CustomViewPager;
 import scout.uw.edu.uwscout.utils.ScoutPagerAdapter;
 import scout.uw.edu.uwscout.utils.UserPreferences;
 
-public class MainActivity extends ScoutActivity implements
-        BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends ScoutActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    private AHBottomNavigation bottomNavigationView;
+    private AHBottomNavigationAdapter navAdapter;
     @BindArray(R.array.scout_tabs) String[] scoutTabs;
     @BindString(R.string.help_email)
     String helpEmail;
@@ -44,17 +47,43 @@ public class MainActivity extends ScoutActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.viewpager);
+        viewPager = (CustomViewPager) findViewById(R.id.viewpager);
         pagerAdapter = new ScoutPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setPagingEnabled(false);
 
-        bottomNavigationView = findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-//        bottomNavigationView.enableShiftingMode(false);
-//        bottomNavigationView.enableItemShiftingMode(false);
-//        bottomNavigationView.enableAnimation(false);
+        String[] viewNames = getResources().getStringArray(R.array.views);
+
+        bottomNavigationView = (AHBottomNavigation) findViewById(R.id.navigation);
+        AHBottomNavigationItem discButt = new AHBottomNavigationItem(viewNames[1], R.drawable.ic_center_focus);
+        AHBottomNavigationItem foodButt = new AHBottomNavigationItem(viewNames[1], R.drawable.ic_attach_file);
+        AHBottomNavigationItem studyButt = new AHBottomNavigationItem(viewNames[2], R.drawable.ic_library_books);
+        AHBottomNavigationItem techButt = new AHBottomNavigationItem(viewNames[3], R.drawable.ic_android);
+        bottomNavigationView.addItem(discButt);
+        bottomNavigationView.addItem(foodButt);
+        bottomNavigationView.addItem(studyButt);
+        bottomNavigationView.addItem(techButt);
+
+        navAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu);
+        bottomNavigationView.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                //replace campus button with filter
+                if (position == 0) {
+                    mMenu.getItem(0).setVisible(true);
+                    mMenu.getItem(1).setVisible(false);
+                } else {
+                    mMenu.getItem(0).setVisible(false);
+                    mMenu.getItem(1).setVisible(true);
+                }
+                viewPager.setCurrentItem(position);
+                //bottomNavigationView.setCurrentItem(position);
+                setTitle(pagerAdapter.getPageTitle(viewPager.getCurrentItem()));
+
+                return true;
+            }
+        });
 
         if (!userPreferences.hasUserOpenedApp()) {
             showCampusChooser();
@@ -73,7 +102,7 @@ public class MainActivity extends ScoutActivity implements
     public boolean onPrepareOptionsMenu(Menu menu) {
         mMenu = menu;
 
-        if(bottomNavigationView.getSelectedItemId() == 0) {
+        if(bottomNavigationView.getCurrentItem() == 0) {
             mMenu.getItem(0).setVisible(true);
             mMenu.getItem(1).setVisible(false);
         } else {
@@ -94,45 +123,6 @@ public class MainActivity extends ScoutActivity implements
         super.onResume();
     }
 
-    /**
-     * updates viewpager when a bottom navigation button is clicked
-     *
-     * @param item the MenuItem that was clicked
-     * @return whetehr the item should be selected or not
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        //replace campus button with filter
-        mMenu.getItem(0).setVisible(false);
-        mMenu.getItem(1).setVisible(true);
-
-        switch (item.getItemId()) {
-            case R.id.ic_arrow:
-                viewPager.setCurrentItem(0, false);
-                bottomNavigationView.getMenu().getItem(0).setChecked(true);
-
-                // replace filter button with campus
-                mMenu.getItem(0).setVisible(true);
-                mMenu.getItem(1).setVisible(false);
-                break;
-            case R.id.ic_android:
-                viewPager.setCurrentItem(1, false);
-                bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                break;
-            case R.id.ic_books:
-                viewPager.setCurrentItem(2, false);
-                bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                break;
-            case R.id.ic_center_focus:
-                viewPager.setCurrentItem(3, false);
-                bottomNavigationView.getMenu().getItem(3).setChecked(true);
-                break;
-        }
-
-        setTitle(pagerAdapter.getPageTitle(viewPager.getCurrentItem()));
-
-        return false;
-    }
 
     /**
      * gets the user preferences instance (there is only one - it follows the singleton pattern)

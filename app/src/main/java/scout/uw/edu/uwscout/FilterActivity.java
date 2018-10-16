@@ -32,7 +32,7 @@ public class FilterActivity extends ScoutActivity {
 
         turbolinksSession.setScreenshotsEnabled(false);
         turbolinksSession.setDebugLoggingEnabled(true);
-        turbolinksView = findViewById(R.id.turbolinks_view);
+        turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_view);
 
         location = getIntent().getStringExtra("INTENT_URL");
         filterType = getIntent().getIntExtra("FILTER_TYPE", 1);

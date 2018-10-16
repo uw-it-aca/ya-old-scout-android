@@ -37,10 +37,10 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
         userPreferences = ((MainActivity)context).getUserPreferences();
 
         views = new TurbolinksView[4];
-        views[0] = ((Activity)mContext).findViewById(R.id.discover_view);
-        views[1] = ((Activity)mContext).findViewById(R.id.food_view);
-        views[2] = ((Activity)mContext).findViewById(R.id.study_view);
-        views[3] = ((Activity)mContext).findViewById(R.id.tech_view);
+        views[0] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.discover_view);
+        views[1] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.food_view);
+        views[2] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.study_view);
+        views[3] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.tech_view);
 
         sessions = new TurbolinksSession[4];
         for(int i = 0; i < sessions.length; i++) {
