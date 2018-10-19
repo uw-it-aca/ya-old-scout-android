@@ -24,7 +24,7 @@
         <item>T</item>
     </array>
 
-    <string name="baseUrl">https://scout-test.s.uw.edu/h/</string>
+    <!--Define scout.url in your local.properties-->
 
     <string-array name="scout_tab_urls">
         <item></item>
