@@ -56,14 +56,15 @@ public class MainActivity extends ScoutActivity {
         String[] viewNames = getResources().getStringArray(R.array.views);
 
         bottomNavigationView = (AHBottomNavigation) findViewById(R.id.navigation);
-        AHBottomNavigationItem discButt = new AHBottomNavigationItem(viewNames[1], R.drawable.ic_center_focus);
-        AHBottomNavigationItem foodButt = new AHBottomNavigationItem(viewNames[1], R.drawable.ic_attach_file);
+        AHBottomNavigationItem discButt = new AHBottomNavigationItem(viewNames[0], R.drawable.ic_home_24px);
+        AHBottomNavigationItem foodButt = new AHBottomNavigationItem(viewNames[1], R.drawable.ic_fastfood);
         AHBottomNavigationItem studyButt = new AHBottomNavigationItem(viewNames[2], R.drawable.ic_library_books);
-        AHBottomNavigationItem techButt = new AHBottomNavigationItem(viewNames[3], R.drawable.ic_android);
+        AHBottomNavigationItem techButt = new AHBottomNavigationItem(viewNames[3], R.drawable.ic_laptop);
         bottomNavigationView.addItem(discButt);
         bottomNavigationView.addItem(foodButt);
         bottomNavigationView.addItem(studyButt);
         bottomNavigationView.addItem(techButt);
+        bottomNavigationView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
         navAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu);
         bottomNavigationView.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
