@@ -167,6 +167,8 @@ public class MainActivity extends ScoutActivity {
             startActivity(browserIntent);
         } else if (id == R.id.action_campus) {
             showCampusChooser();
+        } else if (id == R.id.action_refresh) {
+            pagerAdapter.reloadViews();
         }
 
         return super.onOptionsItemSelected(item);
