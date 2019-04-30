@@ -77,8 +77,8 @@ public class UserPreferences {
 
         String url = getCampusURL() + tabs[tab];
         String params = getFilterParams(tab);
-        String locationParams = getLocationparams();
-        params = params.equals("") ? locationParams : params + "&" + locationParams;
+//        String locationParams = getLocationparams();
+//        params = params.equals("") ? locationParams : params + "&" + locationParams;
         Log.d(LOG_TAG, "Parameters are: " + params);
 
 
@@ -241,5 +241,9 @@ public class UserPreferences {
 
     public ScoutLocation getLocationManager () {
         return  scoutLocation;
+    }
+
+    public Location getLocation() {
+        return this.scoutLocation.getLocation();
     }
 }

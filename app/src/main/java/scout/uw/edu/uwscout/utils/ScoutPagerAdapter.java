@@ -23,13 +23,13 @@ import scout.uw.edu.uwscout.R;
  * Allows ViewPager to directly display views instead of Fragments
  */
 
-public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter {
+public class ScoutPagerAdapter extends PagerAdapter {
 
     private Context mContext;
     private Resources res;
-    private TurbolinksSession[] sessions;
     private UserPreferences userPreferences;
     private TurbolinksView[] views;
+    private ScoutTurbolinksAdapter[] adapters;
 
     public ScoutPagerAdapter (Context context) {
         mContext = context;
@@ -42,9 +42,9 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
         views[2] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.study_view);
         views[3] = (TurbolinksView) ((Activity)mContext).findViewById(R.id.tech_view);
 
-        sessions = new TurbolinksSession[4];
-        for(int i = 0; i < sessions.length; i++) {
-            sessions[i] = TurbolinksSession.getNew(mContext);
+        adapters = new ScoutTurbolinksAdapter[4];
+        for (int i = 0; i < views.length; i++) {
+            adapters[i] = new ScoutTurbolinksAdapter(mContext, userPreferences, views[i]);
         }
     }
 
@@ -78,17 +78,10 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
     public Object instantiateItem(ViewGroup container, int position) {
         String url = userPreferences.getTabURL(position);
 
-        TurbolinksSession session = sessions[position];
-        TurbolinksView view = views[position];
+        adapters[position] = new ScoutTurbolinksAdapter(mContext, userPreferences, views[position]);
+        adapters[position].getSession().visit(url);
 
-        session.setDebugLoggingEnabled(true);
-
-        session.activity((Activity)mContext)
-                .adapter(this)
-                .view(view)
-                .visit(url);
-
-        return view;
+        return views[position];
     }
 
     /**
@@ -103,60 +96,17 @@ public class ScoutPagerAdapter extends PagerAdapter implements TurbolinksAdapter
 
     //TurboLinks Adapter
 
-    @Override
-    public void onPageFinished() {
-    }
-
-    @Override
-    public void onReceivedError(int errorCode) {
-
-    }
-
-    @Override
-    public void pageInvalidated() {
-        Log.d("Invalidated!","");
-    }
-
-    @Override
-    public void requestFailedWithStatusCode(int statusCode) {
-
-    }
-
-    @Override
-    public void visitCompleted() {
-
-    }
-
-    /**
-     * called when user visits a link from within a turbolinks view
-     * @param location the url the user is visiting
-     * @param action String representing whether this is a forward or backward navigation
-     */
-    @Override
-    public void visitProposedToLocationWithAction(String location, String action) {
-        Intent intent = new Intent(mContext, DetailActivity.class);
-        intent.putExtra("INTENT_URL", location);
-        mContext.startActivity(intent);
-    }
 
     public void reloadViews () {
-        for (int i = 0; i < views.length; i++) {
-            String url = userPreferences.getTabURL(i);
-            TurbolinksSession session = sessions[i];
-            if(!url.equals(session.getWebView().getUrl())) {
-                session.resetToColdBoot();
-            }
-            //Log.d("LOADING", url);
-            //session.getWebView().clearCache(false);
-            session.activity((Activity)mContext)
-                    .adapter(this)
-                    .view(views[i])
-                    .visit(url);
+        int i = 0;
+        for (ScoutTurbolinksAdapter adapter : adapters) {
+            adapter.reloadView(i);
+            i++;
         }
     }
 
     @Override
     public String getPageTitle (int tab) {
-        return sessions[tab].getWebView().getTitle();
+        return adapters[tab].getSession().getWebView().getTitle();
     }
 }
