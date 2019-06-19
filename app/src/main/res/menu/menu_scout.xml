@@ -17,12 +17,6 @@
             android:icon="@drawable/ic_filter_list"
             app:showAsAction="ifRoom"/>
     </group>
-    <item
-        android:id="@+id/action_refresh"
-        android:orderInCategory="70"
-        android:title="@string/action_filter"
-        android:icon="@drawable/ic_refresh"
-        app:showAsAction="ifRoom"/>
     <!-- NOTE: when re-added we will need to clear filters on campus settings change
      <item
         android:id="@+id/action_settings"
