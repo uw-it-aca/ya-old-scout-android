@@ -26,7 +26,9 @@ public class FilterActivity extends ScoutActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
 
         ButterKnife.bind(this);
 
@@ -46,6 +48,8 @@ public class FilterActivity extends ScoutActivity {
                 .adapter(this)
                 .view(turbolinksView)
                 .visit(location);
+
+
 
     }
 
