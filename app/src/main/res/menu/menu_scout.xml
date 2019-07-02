@@ -24,9 +24,4 @@
         android:title="@string/action_settings"
         android:icon="@drawable/ic_settings_white_24dp"
         app:showAsAction="never" /> -->
-    <item
-        android:id="@+id/action_help"
-        android:orderInCategory="110"
-        android:title="@string/action_help_and_feedback"
-        app:showAsAction="never" />
 </menu>

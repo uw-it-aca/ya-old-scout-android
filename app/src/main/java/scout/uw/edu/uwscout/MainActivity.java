@@ -166,10 +166,6 @@ public class MainActivity extends ScoutActivity {
             filterIntent.putExtra("INTENT_URL", raw_url + "filter/?" + params);
             filterIntent.putExtra("FILTER_TYPE", tab);
             startActivity(filterIntent);
-        } else if (id == R.id.action_help) {
-            String mailto = "mailto:" + helpEmail + "?subject=" + helpSubject;
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailto));
-            startActivity(browserIntent);
         } else if (id == R.id.action_campus) {
             showCampusChooser();
         }
