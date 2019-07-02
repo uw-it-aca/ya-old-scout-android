@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.graphics.Color;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
@@ -69,7 +70,17 @@ public class MainActivity extends ScoutActivity {
         bottomNavigationView.addItem(studyButt);
         bottomNavigationView.addItem(techButt);
         bottomNavigationView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
-        bottomNavigationView.setAccentColor(R.color.colorBottomNavigationPrimary);
+
+        // style nav button colors
+        //bottomNavigationView.setAccentColor(R.color.colorPrimary);
+        //bottomNavigationView.setInactiveColor(R.color.colorGrey);
+
+        bottomNavigationView.setAccentColor(Color.parseColor("#514DA3"));
+        bottomNavigationView.setInactiveColor(Color.parseColor("#a1a1a1"));
+
+        bottomNavigationView.setForceTint(true);
+        bottomNavigationView.setTranslucentNavigationEnabled(false);
+
 
         navAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu);
         bottomNavigationView.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
