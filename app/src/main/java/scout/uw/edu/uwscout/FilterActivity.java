@@ -106,6 +106,9 @@ public class FilterActivity extends ScoutActivity {
     }
 
     public void submitFilters(View view){
+
+        Log.d("FILTER_URL", turbolinksSession.getWebView().getUrl());
+
         onBackPressed();
     }
 
