@@ -28,6 +28,9 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
 
         mSession.setDebugLoggingEnabled(true);
 
+        // affects CustomViewPagers
+        mSession.setPullToRefreshEnabled(false);
+
         mSession.activity((Activity)mContext)
                 .adapter(this)
                 .view(view);

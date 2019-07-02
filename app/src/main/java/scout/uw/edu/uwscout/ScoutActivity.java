@@ -35,6 +35,7 @@ public class ScoutActivity extends AppCompatActivity implements TurbolinksAdapte
             turbolinksSession = TurbolinksSession.getNew(this);
         }
 
+        // affects FilterActivity and DetailActivity
         turbolinksSession.setPullToRefreshEnabled(false);
     }
 
