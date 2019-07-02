@@ -21,6 +21,6 @@ tools:context=".FilterActivity">
         android:background="@color/colorAccent"
         android:onClick="submitFilters"
         android:src="@drawable/ic_done"
-        app:backgroundTint="@color/colorBottomNavigationPrimary" />
+        app:backgroundTint="@color/colorPrimaryDark" />
 
 </android.support.design.widget.CoordinatorLayout>
