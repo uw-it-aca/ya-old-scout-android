@@ -76,18 +76,20 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
     public void reloadView (int tab) {
         String url = userPreferences.getTabURL(tab);
 
-        if(!url.equals(mSession.getWebView().getUrl())) {
-            mSession.resetToColdBoot();
-        }
+        //if(!url.equals(mSession.getWebView().getUrl())) {
+        //    mSession.resetToColdBoot();
+        //}
 
         //Log.d("LOADING1", url);
         //mSession.setTurbolinksIsReady(false);
         //session.getWebView().clearCache(false);
-        mSession.activity((Activity)mContext)
+        /*mSession.activity((Activity)mContext)
                 .adapter(this)
-                .view(mView)
-                .visit(url);
-
+                .view(mView).visitLocationWithAction(url, "advance");*/
+        if(!url.equals(mSession.getWebView().getUrl())) {
+            mSession.visit(url);
+            mSession.pageInvalidated();
+        }
     }
 
     public TurbolinksSession getSession() {
