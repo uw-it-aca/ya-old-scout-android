@@ -75,15 +75,19 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
 
     public void reloadView (int tab) {
         String url = userPreferences.getTabURL(tab);
+
         if(!url.equals(mSession.getWebView().getUrl())) {
             mSession.resetToColdBoot();
         }
-        //Log.d("LOADING", url);
+
+        //Log.d("LOADING1", url);
+        //mSession.setTurbolinksIsReady(false);
         //session.getWebView().clearCache(false);
         mSession.activity((Activity)mContext)
                 .adapter(this)
                 .view(mView)
                 .visit(url);
+
     }
 
     public TurbolinksSession getSession() {
@@ -93,6 +97,7 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
     @android.webkit.JavascriptInterface
     public boolean setParams(String s) {
         Location loc = this.userPreferences.getLocation();
+        Log.d("JavaBridgeSetParams", "ScoutTurbolinksAdapter setParams called with param: " + s);
         mSession.runJavascript(
                 "Geolocation.getNativeLocation",
                 "" + loc.getLatitude(),

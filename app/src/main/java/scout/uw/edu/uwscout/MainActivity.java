@@ -135,6 +135,7 @@ public class MainActivity extends ScoutActivity {
      */
     @Override
     protected void onResume() {
+        Log.d("MainActivityResume", "Something was resumed");
         pagerAdapter.reloadViews();
 
         super.onResume();

@@ -48,9 +48,6 @@ public class FilterActivity extends ScoutActivity {
                 .adapter(this)
                 .view(turbolinksView)
                 .visit(location);
-
-
-
     }
 
     @Override
@@ -118,21 +115,29 @@ public class FilterActivity extends ScoutActivity {
     private void submitForm(String params){
         Log.d("TYPE", ""+filterType);
         Log.d("PARAMS", params);
-        switch (filterType){
-            case 1:
-                userPreferences.saveFoodFilter(params);
-                break;
-            case 2:
-                userPreferences.saveStudyFilter(params);
-                break;
-            case 3:
-                userPreferences.saveTechFilter(params);
-                break;
+        if (params.equals("renderWebview")) {
+            Log.d("JavaBridgeSetParams", "if case");
+            double lat = userPreferences.getLocationManager().getLocation().getLatitude();
+            double lng = userPreferences.getLocationManager().getLocation().getLongitude();
+            turbolinksSession.runJavascriptRaw("Geolocation.getNativeLocation("+lat+", "+lng+")");
+        } else {
+            switch (filterType){
+                case 1:
+                    userPreferences.saveFoodFilter(params);
+                    break;
+                case 2:
+                    userPreferences.saveStudyFilter(params);
+                    break;
+                case 3:
+                    userPreferences.saveTechFilter(params);
+                    break;
+            }
         }
     }
 
     @JavascriptInterface
     public void setParams(String params){
+        Log.d("JavaBridgeSetParams", "FilterActivity setParams called with param: " + params);
         submitForm(params);
     }
 

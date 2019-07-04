@@ -79,7 +79,7 @@ public class UserPreferences {
         String params = getFilterParams(tab);
 //        String locationParams = getLocationparams();
 //        params = params.equals("") ? locationParams : params + "&" + locationParams;
-        Log.d(LOG_TAG, "Parameters are: " + params);
+        Log.d(LOG_TAG, "Parameters for tab " + tab + " are: " + params);
 
 
         if (!params.equals("")) {
@@ -90,6 +90,7 @@ public class UserPreferences {
 
         }
 
+        Log.d(LOG_TAG, "url for tab " + tab + " are: " + url);
         return url;
     }
 
