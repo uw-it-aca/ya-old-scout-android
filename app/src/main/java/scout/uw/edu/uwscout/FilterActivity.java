@@ -68,11 +68,11 @@ public class FilterActivity extends ScoutActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_clear) {
+        /*if (id == R.id.action_clear) {
             submitForm("");
             onBackPressed();
             return true;
-        } else if (id == android.R.id.home) {
+        } else*/ if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }
