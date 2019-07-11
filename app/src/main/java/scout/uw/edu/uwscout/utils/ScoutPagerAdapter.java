@@ -78,7 +78,9 @@ public class ScoutPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         String url = userPreferences.getTabURL(position);
 
-        adapters[position] = new ScoutTurbolinksAdapter(mContext, userPreferences, views[position]);
+        if (adapters[position] == null) {
+            adapters[position] = new ScoutTurbolinksAdapter(mContext, userPreferences, views[position]);
+        }
         adapters[position].getSession().visit(url);
 
         return views[position];
@@ -97,10 +99,10 @@ public class ScoutPagerAdapter extends PagerAdapter {
     //TurboLinks Adapter
 
 
-    public void reloadViews () {
+    public void reloadViews (boolean force) {
         int i = 0;
         for (ScoutTurbolinksAdapter adapter : adapters) {
-            adapter.reloadView(i);
+            adapter.reloadView(i, force);
             i++;
         }
     }

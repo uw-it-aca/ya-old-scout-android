@@ -73,17 +73,23 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
         mContext.startActivity(intent);
     }
 
-    public void reloadView (int tab) {
+    public void reloadView (int tab, boolean force) {
         String url = userPreferences.getTabURL(tab);
-        if(!url.equals(mSession.getWebView().getUrl())) {
-            mSession.resetToColdBoot();
-        }
-        //Log.d("LOADING", url);
+
+        //if(!url.equals(mSession.getWebView().getUrl())) {
+        //    mSession.resetToColdBoot();
+        //}
+
+        //Log.d("LOADING1", url);
+        //mSession.setTurbolinksIsReady(false);
         //session.getWebView().clearCache(false);
-        mSession.activity((Activity)mContext)
+        /*mSession.activity((Activity)mContext)
                 .adapter(this)
-                .view(mView)
-                .visit(url);
+                .view(mView).visitLocationWithAction(url, "advance");*/
+        if(!url.equals(mSession.getWebView().getUrl()) || force) {
+            mSession.visit(url);
+            mSession.pageInvalidated();
+        }
     }
 
     public TurbolinksSession getSession() {
@@ -93,10 +99,11 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
     @android.webkit.JavascriptInterface
     public boolean setParams(String s) {
         Location loc = this.userPreferences.getLocation();
+        Log.d("JavaBridgeSetParams", "ScoutTurbolinksAdapter setParams called with param: " + s);
         mSession.runJavascript(
                 "Geolocation.getNativeLocation",
-                "" + loc.getLatitude(),
-                "" + loc.getLongitude()
+                "" + (loc == null ? "" : loc.getLatitude()),
+                "" + (loc == null ? "" : loc.getLongitude())
         );
         return true;
     }

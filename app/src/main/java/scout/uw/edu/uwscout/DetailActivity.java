@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Menu;
 
 import com.basecamp.turbolinks.TurbolinksAdapter;
@@ -30,10 +31,8 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
 
         TurbolinksView turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_detail);
 
-        TurbolinksSession.getDefault(this).activity(this)
-                .adapter(this)
-                .view(turbolinksView)
-                .visit(url);
+        Log.d("DetailActivity", "onCreate Called with intent url: " + url);
+        TurbolinksSession.getDefault(this).activity(this).adapter(this).view(turbolinksView).visit(url);
     }
 
     @Override
@@ -70,6 +69,7 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         // set appbar title after the turbolinks visit
         this.setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Log.d("DetailActivity", "visitCompleted Called");
     }
 
     /**
@@ -79,6 +79,7 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
      */
     @Override
     public void visitProposedToLocationWithAction(String location, String action) {
+        Log.d("DetailActivity", "visitProposedToLocationWithAction Called");
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(location));
         startActivity(browserIntent);
     }

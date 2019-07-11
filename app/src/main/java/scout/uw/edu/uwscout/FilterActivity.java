@@ -19,7 +19,7 @@ public class FilterActivity extends ScoutActivity {
     private String location;
     private TurbolinksView turbolinksView;
     private String queryParams = "";
-    private int filterType;
+    private static int filterType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,10 @@ public class FilterActivity extends ScoutActivity {
         turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_view);
 
         location = getIntent().getStringExtra("INTENT_URL");
-        filterType = getIntent().getIntExtra("FILTER_TYPE", 1);
+        filterType = getIntent().getIntExtra("FILTER_TYPE", -1);
 
         queryParams = userPreferences.getFilter(filterType);
-        Log.d(LOG_TAG, "Initial Filter Type " + filterType + " and query params: " + queryParams) ;
+        Log.d(LOG_TAG, "Initial Filter Type " + filterType + " and query params: " + queryParams);
 
         turbolinksSession.addJavascriptInterface(this, "scoutBridge");
         turbolinksSession.progressView(LayoutInflater.from(this).inflate(com.basecamp.turbolinks.R.layout.turbolinks_progress, turbolinksView, false), com.basecamp.turbolinks.R.id.turbolinks_default_progress_indicator, Integer.MAX_VALUE)
@@ -48,9 +48,6 @@ public class FilterActivity extends ScoutActivity {
                 .adapter(this)
                 .view(turbolinksView)
                 .visit(location);
-
-
-
     }
 
     @Override
@@ -118,22 +115,39 @@ public class FilterActivity extends ScoutActivity {
     private void submitForm(String params){
         Log.d("TYPE", ""+filterType);
         Log.d("PARAMS", params);
-        switch (filterType){
-            case 1:
-                userPreferences.saveFoodFilter(params);
-                break;
-            case 2:
-                userPreferences.saveStudyFilter(params);
-                break;
-            case 3:
-                userPreferences.saveTechFilter(params);
-                break;
+        if (params.equals("renderWebview")) {
+            Log.d("JavaBridgeSetParams", "if case");
+            double lat = userPreferences.getLocationManager().getLocation().getLatitude();
+            double lng = userPreferences.getLocationManager().getLocation().getLongitude();
+            turbolinksSession.runJavascriptRaw("Geolocation.getNativeLocation("+lat+", "+lng+")");
+        } else {
+            Log.d(LOG_TAG, "submitForm " + filterType + " and query params: " + params);
+            switch (filterType){
+                case 1:
+                    userPreferences.saveFoodFilter(params);
+                    break;
+                case 2:
+                    userPreferences.saveStudyFilter(params);
+                    break;
+                case 3:
+                    userPreferences.saveTechFilter(params);
+                    break;
+            }
         }
     }
 
     @JavascriptInterface
     public void setParams(String params){
+        Log.d("JavaBridgeSetParams", "FilterActivity filterType " + filterType + " setParams called with param: " + params);
         submitForm(params);
+    }
+
+    @Override
+    public void onDestroy(){
+        getIntent().removeExtra("INTENT_URL");
+        getIntent().removeExtra("FILTER_TYPE");
+        Log.d(LOG_TAG, "Destroyed Filter Type " + filterType);
+        super.onDestroy();
     }
 
 }
