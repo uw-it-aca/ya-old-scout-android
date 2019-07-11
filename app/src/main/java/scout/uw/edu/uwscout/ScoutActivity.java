@@ -36,7 +36,7 @@ public class ScoutActivity extends AppCompatActivity implements TurbolinksAdapte
         }
 
         // affects FilterActivity and DetailActivity
-        turbolinksSession.setPullToRefreshEnabled(false);
+        turbolinksSession.setPullToRefreshEnabled(true);
     }
 
     @Override
