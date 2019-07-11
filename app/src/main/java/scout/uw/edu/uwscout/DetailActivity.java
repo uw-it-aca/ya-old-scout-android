@@ -32,7 +32,7 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         TurbolinksView turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_detail);
 
         Log.d("DetailActivity", "onCreate Called with intent url: " + url);
-        TurbolinksSession.getDefault(this).visit(url);
+        TurbolinksSession.getDefault(this).activity(this).adapter(this).view(turbolinksView).visit(url);
     }
 
     @Override

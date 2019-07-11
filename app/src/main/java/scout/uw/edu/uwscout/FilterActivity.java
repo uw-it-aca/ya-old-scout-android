@@ -121,7 +121,7 @@ public class FilterActivity extends ScoutActivity {
             double lng = userPreferences.getLocationManager().getLocation().getLongitude();
             turbolinksSession.runJavascriptRaw("Geolocation.getNativeLocation("+lat+", "+lng+")");
         } else {
-            Log.d(LOG_TAG, "submitForm " + filterType + " and query params: " + queryParams);
+            Log.d(LOG_TAG, "submitForm " + filterType + " and query params: " + params);
             switch (filterType){
                 case 1:
                     userPreferences.saveFoodFilter(params);

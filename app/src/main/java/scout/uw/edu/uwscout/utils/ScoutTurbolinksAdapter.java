@@ -73,7 +73,7 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
         mContext.startActivity(intent);
     }
 
-    public void reloadView (int tab) {
+    public void reloadView (int tab, boolean force) {
         String url = userPreferences.getTabURL(tab);
 
         //if(!url.equals(mSession.getWebView().getUrl())) {
@@ -86,7 +86,7 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
         /*mSession.activity((Activity)mContext)
                 .adapter(this)
                 .view(mView).visitLocationWithAction(url, "advance");*/
-        if(!url.equals(mSession.getWebView().getUrl())) {
+        if(!url.equals(mSession.getWebView().getUrl()) || force) {
             mSession.visit(url);
             mSession.pageInvalidated();
         }
@@ -102,8 +102,8 @@ public class ScoutTurbolinksAdapter implements TurbolinksAdapter {
         Log.d("JavaBridgeSetParams", "ScoutTurbolinksAdapter setParams called with param: " + s);
         mSession.runJavascript(
                 "Geolocation.getNativeLocation",
-                "" + loc.getLatitude(),
-                "" + loc.getLongitude()
+                "" + (loc == null ? "" : loc.getLatitude()),
+                "" + (loc == null ? "" : loc.getLongitude())
         );
         return true;
     }

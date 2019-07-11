@@ -102,11 +102,12 @@ public class MainActivity extends ScoutActivity {
             }
         });
 
-        if (!userPreferences.hasUserOpenedApp()) {
+        /*if (!userPreferences.hasUserOpenedApp()) {
             showCampusChooser();
         } else {
             campusIndex = userPreferences.getCampusSelectedIndex();
-        }
+        }*/
+        campusIndex = 0;
 
     }
 
@@ -136,9 +137,17 @@ public class MainActivity extends ScoutActivity {
     @Override
     protected void onResume() {
         Log.d("MainActivityResume", "Something was resumed");
-        pagerAdapter.reloadViews();
+        pagerAdapter.reloadViews(false);
 
         super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.d("MainActivityRestart", "Something was resumed");
+        pagerAdapter.reloadViews(false);
+
+        super.onRestart();
     }
 
 
@@ -210,6 +219,7 @@ public class MainActivity extends ScoutActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == 0) {
             userPreferences.getLocationManager().setUpLocationListeners();
+            pagerAdapter.reloadViews(true);
         }
     }
 
@@ -229,7 +239,7 @@ public class MainActivity extends ScoutActivity {
 
                             Log.d("CAMPUS CHANGED", "Reloading tabs");
 
-                            pagerAdapter.reloadViews();
+                            pagerAdapter.reloadViews(false);
                         }
                     }
 

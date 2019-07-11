@@ -68,8 +68,8 @@ public class ScoutLocation {
             List<String> providers = locationManager.getAllProviders();
             for (String provider : providers) {
                 Location location = locationManager.getLastKnownLocation(provider);
-                if (location != null && isBetterLocation(location, mLocation)) {
-                    mLocation = location;
+                if (location != null) {
+                    locationUpdate(location);
                 }
             }
         }

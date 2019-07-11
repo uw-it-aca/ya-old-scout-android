@@ -99,10 +99,10 @@ public class ScoutPagerAdapter extends PagerAdapter {
     //TurboLinks Adapter
 
 
-    public void reloadViews () {
+    public void reloadViews (boolean force) {
         int i = 0;
         for (ScoutTurbolinksAdapter adapter : adapters) {
-            adapter.reloadView(i);
+            adapter.reloadView(i, force);
             i++;
         }
     }
