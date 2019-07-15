@@ -72,9 +72,7 @@ public class MainActivity extends ScoutActivity {
         bottomNavigationView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
         // style nav button colors
-        //bottomNavigationView.setAccentColor(R.color.colorPrimary);
-        //bottomNavigationView.setInactiveColor(R.color.colorGrey);
-
+        bottomNavigationView.setDefaultBackgroundColor(Color.parseColor("#fcfcfc"));
         bottomNavigationView.setAccentColor(Color.parseColor("#514DA3"));
         bottomNavigationView.setInactiveColor(Color.parseColor("#a1a1a1"));
 
