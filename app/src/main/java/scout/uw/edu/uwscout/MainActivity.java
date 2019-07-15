@@ -106,7 +106,7 @@ public class MainActivity extends ScoutActivity {
             campusIndex = userPreferences.getCampusSelectedIndex();
         }*/
         campusIndex = 0;
-
+        setTitle("Discover");
     }
 
     /**

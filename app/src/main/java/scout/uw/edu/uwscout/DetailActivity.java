@@ -22,7 +22,7 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_layout);
-
+        setTitle("");
         Bundle extras = getIntent().getExtras();
         String url = extras.getString("INTENT_URL");
 
