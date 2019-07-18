@@ -17,7 +17,9 @@ import com.basecamp.turbolinks.TurbolinksView;
  * Created by adikumar on 3/23/18.
  */
 
+
 public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,10 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         TurbolinksView turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_detail);
 
         Log.d("DetailActivity", "onCreate Called with intent url: " + url);
+
+        // override default transition with slide animation
+        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         TurbolinksSession.getDefault(this).activity(this).adapter(this).view(turbolinksView).visit(url);
     }
 
@@ -72,15 +78,26 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         Log.d("DetailActivity", "visitCompleted Called");
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        Log.d("DetailActivity", "finish Called");
+
+        // override default transition with slide animation
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     /**
      * called when user visits a link from within a turbolinks view
      * @param location the url the user is visiting
      * @param action String representing whether this is a forward or backward navigation
      */
+
     @Override
     public void visitProposedToLocationWithAction(String location, String action) {
         Log.d("DetailActivity", "visitProposedToLocationWithAction Called");
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(location));
         startActivity(browserIntent);
     }
+
 }
