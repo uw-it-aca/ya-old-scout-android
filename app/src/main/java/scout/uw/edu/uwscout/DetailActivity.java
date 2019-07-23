@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 
 import com.basecamp.turbolinks.TurbolinksAdapter;
@@ -25,6 +26,7 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_layout);
         setTitle("");
+      
         Bundle extras = getIntent().getExtras();
         String url = extras.getString("INTENT_URL");
 
@@ -34,11 +36,15 @@ public class DetailActivity extends ScoutActivity implements TurbolinksAdapter {
         TurbolinksView turbolinksView = (TurbolinksView) findViewById(R.id.turbolinks_detail);
 
         Log.d("DetailActivity", "onCreate Called with intent url: " + url);
+       
 
         // override default transition with slide animation
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
-        TurbolinksSession.getDefault(this).activity(this).adapter(this).view(turbolinksView).visit(url);
+        turbolinksSession.activity(this)
+               .adapter(this)
+               .view(turbolinksView)
+               .visit(url);
     }
 
     @Override

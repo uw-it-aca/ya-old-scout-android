@@ -25,6 +25,7 @@ public class FilterActivity extends ScoutActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
+        setTitle("");
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -43,8 +44,7 @@ public class FilterActivity extends ScoutActivity {
         Log.d(LOG_TAG, "Initial Filter Type " + filterType + " and query params: " + queryParams);
 
         turbolinksSession.addJavascriptInterface(this, "scoutBridge");
-        turbolinksSession.progressView(LayoutInflater.from(this).inflate(com.basecamp.turbolinks.R.layout.turbolinks_progress, turbolinksView, false), com.basecamp.turbolinks.R.id.turbolinks_default_progress_indicator, Integer.MAX_VALUE)
-                .activity(this)
+        turbolinksSession.activity(this)
                 .adapter(this)
                 .view(turbolinksView)
                 .visit(location);
