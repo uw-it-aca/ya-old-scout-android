@@ -92,7 +92,8 @@ public class MainActivity extends ScoutActivity {
                     mMenu.getItem(0).setVisible(false);
                     mMenu.getItem(1).setVisible(true);
                 }
-                viewPager.setCurrentItem(position);
+                // set viewpager to show current selected tab + turn off slide animation (false)
+                viewPager.setCurrentItem(position, false);
                 //bottomNavigationView.setCurrentItem(position);
                 setTitle(pagerAdapter.getPageTitle(viewPager.getCurrentItem()));
 
@@ -106,7 +107,7 @@ public class MainActivity extends ScoutActivity {
             campusIndex = userPreferences.getCampusSelectedIndex();
         }*/
         campusIndex = 0;
-
+        setTitle("Discover");
     }
 
     /**
