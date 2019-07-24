@@ -17,15 +17,13 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="56dp">
 
             <com.basecamp.turbolinks.TurbolinksView
                 android:id="@+id/discover_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="0dp">
-
-            </com.basecamp.turbolinks.TurbolinksView>
+                android:layout_marginTop="0dp" />
 
             <com.basecamp.turbolinks.TurbolinksView
                 android:id="@+id/food_view"
@@ -37,15 +35,14 @@
                 android:id="@+id/study_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="0dp">
-
-            </com.basecamp.turbolinks.TurbolinksView>
+                android:layout_marginTop="0dp" />
 
             <com.basecamp.turbolinks.TurbolinksView
                 android:id="@+id/tech_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp" />
+
         </scout.uw.edu.uwscout.utils.CustomViewPager>
 
     </RelativeLayout>
@@ -57,7 +54,7 @@
         <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
             android:id="@+id/navigation"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
             android:layout_alignParentBottom="true"
             app:menu="@menu/bottom_navigation_menu" />
     </RelativeLayout>
